@@ -1,0 +1,133 @@
+<app-navbar></app-navbar>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row m-t-sm">
+            <div class="col-md-15">
+                <div class="panel">
+                    <div class="panel-body">
+                        <div class="col-md-12 col-sm-12" id="form" style="display:block;">
+                            <div class="panel panel-filled">
+                                <div class="panel-body">
+                                    <div class="view-header">
+                                        <div class="header-icon">
+                                            <i class="pe page-header-icon pe-7s-map"></i>
+                                        </div>
+                                        <div class="header-title">
+                                            <h3>Locales</h3>
+                                            <small>
+                                                Ubicación de Nuestras Tiendas
+                                            </small>
+                                        </div>
+                                    </div>
+                                    <div class="map">
+                                        <google-map height="50vh" width="100%" [options]="mapOptions"
+                                            (mapInitialized)="handleMapInitialized($event)">
+                                        </google-map>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12" id="form" style="display:block;">
+                            <div class="panel panel-filled">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h5 class="m-t-xs">Ubicación de Nuestros Locales - Lima</h5>
+                                        </div>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table id="tableExample1" class="table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Departamento</th>
+                                                    <th>Distrito</th>
+                                                    <th>Cantidad</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let tienda of listTiendas">
+                                                    <td>{{ tienda.departamento }}</td>
+                                                    <td>{{ tienda.distrito }}</td>
+                                                    <td>{{ tienda.cantidad }}</td>
+                                                    <td>
+                                                        <i (click)="verTiendaEnMapa(tienda)" style="font-size: 25px;" class="pe pe-7s-look text-accent"></i>&nbsp;&nbsp;
+                                                        <i (click)="deleteTienda(tienda._id)" style="font-size: 25px;" class="pe pe-7s-trash text-accent"></i>&nbsp;&nbsp;
+                                                        <i style="font-size: 25px;" class="pe pe-7s-pen text-accent"></i>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12" id="form" style="display:block;">
+                            <div class="panel panel-filled">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h5 class="m-t-xs">Agregar nueva Tienda</h5>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <form (ngSubmit)="createTienda()">
+                                          <div>
+                                            <label for="department" class="form-label">Departamento:</label>
+                                            <input class="input-field" type="text" id="department" class="form-control"  name="department" [(ngModel)]="newTienda.departamento" required>
+                                          </div>
+                                          <div>
+                                            <label for="district" class="form-label" >Distrito:</label>
+                                            <input class="input-field" type="text" id="district" class="form-control" name="district" [(ngModel)]="newTienda.distrito" required>
+                                          </div>
+                                          <div>
+                                            <label for="quantity" class="form-label">Cantidad:</label>
+                                            <input class="input-field" type="text" id="quantity" class="form-control" name="quantity" [(ngModel)]="newTienda.cantidad" required>
+                                          </div><br>
+                                            <button type="button" class="btn btn-warning" type="submit">Agregar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-sm-12" id="form" style="display:block;">
+                            <div class="panel panel-filled">
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h5 class="m-t-xs">Actualizar Tienda</h5>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <form (ngSubmit)="updateTienda()">
+                                        <div>
+                                            <label for="latitud" 
+                                                   class="form-label">Departamento de Tienda</label>
+                                            <input type="text" class="form-control" 
+                                                   id="latitud" name="latitud"
+                                                   required [(ngModel)]="selectedTienda.departamento">
+                                        </div>&nbsp;&nbsp;
+                                        <div>
+                                            <label for="latitud" 
+                                                   class="form-label">Distrito de Tienda</label>
+                                            <input type="text" class="form-control" 
+                                                   id="latitud" name="latitud">
+                                        </div>&nbsp;&nbsp;
+                                        <div>
+                                            <label for="latitud" 
+                                                   class="form-label">Cantidad de Tienda</label>
+                                            <input type="text" class="form-control" 
+                                                   id="latitud" name="latitud">
+                                        </div>&nbsp;&nbsp; <br>
+                                        <button type="button" class="btn btn-warning" type="submit">Actualizar</button>
+                                      </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
